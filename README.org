@@ -1,0 +1,41 @@
+* Half way to Hawaii Game
+
+Passengers flying to Hawaii with United Airlines can participate in a contest on-board which involves guessing at what time the plane will be at halfway point between mainland US and Hawaii.  The pilot provides
+- distance
+- airspeed
+- headwind
+- start time (in HST).
+
+* Observations
+
+- majority of the distance is covered at cruising altitude at constant speed
+- during ascent and descent speed increase/decrease is fairly linear, to obtain average speed during ascent/descent we can use slope of distance covered to acheive max speed and max speed.
+- based on very scientific process of guesswork, slope we are using is 0.64
+
+** Here are final parameters we are working with
+
+- totalDistance
+- ascentDistance = 100nm
+- descentDistance = 100nm
+- cruisingDistance = totalDistance - ascentDistance - descentDistance
+- groundSpeed = airspeed - headwinds
+- average ascent/descent speed = groundSpeed * slope (0.64)
+- start time (in HST)
+
+#+begin_src
+  ascentDuration = ascentDistance in nm / ascentSpeed in nm/h
+  descentDuration = descentDistance in nm / descentSpeed in nm/h
+  cruiseDuration = cruisingDistance in nm / cruisingSpeed in nm/h
+
+  totalDuration = (ascentDuration + descentDuration + cruiseDuration)
+#+end_src
+
+- assuming that ascentDuration ≈ descentDuration
+
+#+begin_src
+  timeAtHalfWayPoint = startTime + totalDuration / 2
+#+end_src
+
+[[https://godoc.org/github.com/ceocoder/hawaii][GoDoc]]
+
+Enjoy the trip and let me know if you win that book, Mahalo!
